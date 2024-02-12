@@ -30,13 +30,15 @@ use std::{
     path::Path,
 };
 
-const SOURCE: &str = "original";
-const DIR: &str = "split";
+const SOURCE: &str = ".test/original";
+const DIR: &str = ".test/split";
 const CHUNK_SIZE: u64 = 3;
 const DATA: &[u8] = b"I love you";
-const TARGET: &str = "reassembled";
+const TARGET: &str = ".test/reassembled";
 
 fn main() {
+    _ = fs::remove_dir_all(".test");
+    fs::create_dir(".test");
     _ = fs::write(SOURCE, DATA);
 
     _ = splitter::split(&mut File::open(SOURCE).unwrap(), DIR, CHUNK_SIZE);
