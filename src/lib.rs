@@ -16,7 +16,7 @@ pub fn split(
     dir: &(impl AsRef<Path> + ?Sized),
     chunk_size: u64,
 ) -> io::Result<()> {
-    fs::create_dir_all(dir)?;
+    fs::create_dir(dir)?;
     for i in 0usize.. {
         let length = io::copy(
             &mut source.take(chunk_size),
